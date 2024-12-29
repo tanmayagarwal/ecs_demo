@@ -3,11 +3,11 @@ const cors = require('cors');
 const mongoose = require("mongoose");
 const port = 3001;
 const routes = require("./routes");
-
+const mongoUrl = process.env.MONGO_URL;
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://mongo:27017/todos", {
+  await mongoose.connect(mongoUrl, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });
