@@ -41,7 +41,7 @@ jobs:
             ECR_REPOSITORY: "ecs-demo-backend"
             IMAGE_TAG: latest
           run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f main_backend/Dockerfile main_backend
+            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f backend/Dockerfile backend
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
        # To test
   
