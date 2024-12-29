@@ -34,14 +34,15 @@ jobs:
           run: |
             docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f frontend/Dockerfile frontend
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            aws ecs update-service --cluster ecs-demo --service ecs-demo-frontend-service --force-new-deployment
 
-        - name: Build and push the tagged docker image to Amazon ECR [BACKEND]
-          env:
-            ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
-            ECR_REPOSITORY: "ecs-demo-backend"
-            IMAGE_TAG: latest
-          run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f backend/Dockerfile backend
-            docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        # - name: Build and push the tagged docker image to Amazon ECR [BACKEND]
+        #   env:
+        #     ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
+        #     ECR_REPOSITORY: "ecs-demo-backend"
+        #     IMAGE_TAG: latest
+        #   run: |
+        #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f backend/Dockerfile backend
+        #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
        # To test
   
